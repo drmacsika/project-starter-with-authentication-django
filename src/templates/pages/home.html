@@ -3,6 +3,6 @@
   <p><a href="{% url 'accounts:logout' %}">Log Out</a></p>
 {% else %}
   <p>You are not logged in</p>
-  <a href="{% url 'accounts:login' %}">Log In</a> |
-  <a href="{% url 'accounts:signup' %}">Sign Up</a>
+  <a href="{% url 'accounts:login' %}?next={{request.path}}">Log In</a> |
+  <a href="{% url 'accounts:signup' %}?next={{request.path}}">Sign Up</a>
 {% endif %}

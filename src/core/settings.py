@@ -1,5 +1,7 @@
 from pathlib import Path
 
+from django.urls import reverse_lazy
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -126,14 +128,23 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
 ######################### Newly Added ############################
 # Generic Set Ups
 
+# Auth Set Up
 AUTH_USER_MODEL = 'accounts.CustomUser'
+LOGIN_URL = 'accounts:login'  # reverse_lazy('accounts:login')
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_URL = 'accounts:logout'
+LOGOUT_REDIRECT_URL = 'home'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 SITE_ID = 1
+# reverse_lazy('accounts:email_verification_sent')
+SIGNUP_REDIRECT_URL = 'accounts:email_verification_sent'
 
-# All Auth Set Up
+
+# Django AllAuth Package Set Up
 
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -144,8 +155,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 ACCOUNT_EMAIL_REQUIRED = True
-# ACCOUNT_EMAIL_VERIFICATION = None
-# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # 'optional'
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 ACCOUNT_SESSION_REMEMBER = True
@@ -153,14 +163,18 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_LOGOUT_ON_GET = False
 LOGIN_REDIRECT_URL = 'home'
-# LOGOUT_REDIRECT_URL = "home"
 ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
+# ACCOUNT_SIGNUP_REDIRECT_URL = 'accounts:email_verification_sent'
+ACCOUNT_ADAPTER = 'accounts.adapter.MyAccountAdapter'
+ADAPTER = 'accounts.adapter.MyAccountAdapter'
 
-
-# ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS =1
+# ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 # ACCOUNT_EMAIL_REQUIRED = True
 # ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 # ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+# ACCOUNT_DEFAULT_HTTP_PROTOCOL = "http"
+# ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = settings.LOGIN_URL
+# ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = None
 
 # # 1 day
 # ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400
