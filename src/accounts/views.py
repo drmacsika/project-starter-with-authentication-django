@@ -3,11 +3,14 @@ from allauth.account.utils import (get_next_redirect_url,
 from allauth.account.views import (EmailVerificationSentView,
                                    PasswordChangeView,
                                    PasswordResetFromKeyView, PasswordResetView,
-                                   PasswordSetView, SignupView,
+                                   PasswordSetView,
+                                   RedirectAuthenticatedUserMixin, SignupView,
                                    sensitive_post_parameters_m)
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.views import View
 
 
 class CustomSignupView(SignupView):
@@ -17,10 +20,6 @@ class CustomSignupView(SignupView):
         ret = get_next_redirect_url(
             self.request, self.redirect_field_name) or self.success_url
         return ret
-
-
-class CustomEmailVerificationSentView(EmailVerificationSentView):
-    template_name = "accounts/verification_sent.html"
 
 
 class CustomPasswordResetView(PasswordResetView):
@@ -56,6 +55,7 @@ class CustomPasswordResetFromKeyView(PasswordResetFromKeyView):
         return ret
 
 
+@method_decorator(login_required, name='dispatch')
 class CustomPasswordChangeView(PasswordChangeView):
     template_name = "accounts/password_change.html"
     success_url = reverse_lazy("accounts:change_password")
@@ -68,9 +68,7 @@ class CustomPasswordChangeView(PasswordChangeView):
         )
 
 
-password_change_view = login_required(CustomPasswordChangeView.as_view())
-
-
+@method_decorator(login_required, name='dispatch')
 class CustomPasswordSetView(PasswordSetView):
     template_name = "accounts/password_set.html"
     success_url = reverse_lazy("accounts:set_password")
@@ -80,6 +78,3 @@ class CustomPasswordSetView(PasswordSetView):
         if self.request.user.has_usable_password():
             return HttpResponseRedirect(reverse_lazy("accounts:change_password"))
         return super(PasswordSetView, self).dispatch(request, *args, **kwargs)
-
-
-password_set_view = login_required(CustomPasswordSetView.as_view())
