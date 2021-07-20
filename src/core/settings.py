@@ -133,15 +133,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Generic Set Ups
 
 # Auth Set Up
+
 AUTH_USER_MODEL = 'accounts.CustomUser'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+SITE_ID = 1
 LOGIN_URL = 'accounts:login'  # reverse_lazy('accounts:login')
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_URL = 'accounts:logout'
 LOGOUT_REDIRECT_URL = 'home'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-SITE_ID = 1
 SIGNUP_REDIRECT_URL = 'accounts:email_verification_sent'
-ACCOUNT_FORMS = {'reset_password': 'accounts.forms.CustomResetPasswordForm'}
+
 
 # Django AllAuth Package Set Up
 
@@ -153,27 +154,21 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
+ADAPTER = 'accounts.adapter.MyAccountAdapter'
+ACCOUNT_ADAPTER = 'accounts.adapter.MyAccountAdapter'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = "http"
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = None
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
+ACCOUNT_EMAIL_MAX_LENGTH = 255
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # 'optional'
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
-ACCOUNT_SESSION_REMEMBER = True
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_FORMS = {'reset_password': 'accounts.forms.CustomResetPasswordForm'}
 ACCOUNT_LOGOUT_ON_GET = False
-LOGIN_REDIRECT_URL = 'home'
 ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
-# ACCOUNT_SIGNUP_REDIRECT_URL = 'accounts:email_verification_sent'
-ACCOUNT_ADAPTER = 'accounts.adapter.MyAccountAdapter'
-ADAPTER = 'accounts.adapter.MyAccountAdapter'
-
-# ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
-# ACCOUNT_EMAIL_REQUIRED = True
-# ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-# ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
-# ACCOUNT_DEFAULT_HTTP_PROTOCOL = "http"
-# ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = settings.LOGIN_URL
-# ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = None
-
-# # 1 day
-# ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400
+ACCOUNT_PRESERVE_USERNAME_CASING = False
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_BLACKLIST = ["admin"]
