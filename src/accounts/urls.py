@@ -22,7 +22,7 @@ urlpatterns = [
          name='email_verification_sent'),
     re_path(r"^confirm-email/(?P<key>[-:\w]+)/$", ConfirmEmailView.as_view(
         template_name='accounts/email_confirm.html'), name='confirm_email'),
-    path('logout/', LogoutView.as_view(), name='logout'),
+    path('logout/', LogoutView.as_view(template_name='accounts/logout.html'), name='logout'),
     path("password/change/", CustomPasswordChangeView.as_view(),
          name="change_password"),
     path("password/set/", CustomPasswordSetView.as_view(), name="set_password"),
@@ -72,7 +72,7 @@ urlpatterns = [
     path("inactive/", views.account_inactive, name="account_inactive"),
     # E-mail
     path("email/", views.email, name="account_email"),
-    
+
 ]
 
 
