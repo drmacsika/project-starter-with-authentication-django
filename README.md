@@ -6,4 +6,4 @@ Complete Project Starter and Authentication for Django
 - Email set up for authentication.
 - Settings file for base, development and production.
 - Custom project templates for athentication.
-- 
+- Production-ready directory structure.
