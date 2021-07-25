@@ -1,11 +1,10 @@
 import json
-import os
 
 from django.core.exceptions import ImproperlyConfigured
 
 from .base import *
 
-secret_key = os.path.join(BASE_DIR, "secrets.json")
+secret_key = BASE_DIR / "secrets.json"
 with open(secret_key) as secrets_file:
     secrets = json.load(secrets_file)
 
