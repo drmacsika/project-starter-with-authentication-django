@@ -103,7 +103,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static", ]
 STATIC_ROOT = BASE_DIR.parent / "static_assets/static_root"
 MEDIA_URL = '/media/'
-STATIC_ROOT = BASE_DIR.parent / "static_assets/media_root"
+MEDIA_ROOT = BASE_DIR.parent / "static_assets/media_root"
 
 # Auth Set Up
 
