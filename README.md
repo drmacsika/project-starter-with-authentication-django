@@ -8,3 +8,4 @@ Complete Project Starter and Authentication for Django
 - Custom project templates for athentication.
 - Production-ready directory structure.
 - Class based views.
+- Configuration for AWS S3 for storage, SES for Email, Cloudfront for CDN.
