@@ -9,3 +9,8 @@ Complete Project Starter and Authentication for Django
 - Production-ready directory structure.
 - Class based views.
 - Configuration for AWS S3 for storage, SES for Email, Cloudfront for CDN.
+
+## Contact Info
+
+If you have any question or want to reach me directly, 
+[Contact Nsikak Imoh](https://nsikakimoh.com).
